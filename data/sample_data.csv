@@ -1,0 +1,9 @@
+customer_id,name,age,city,salary,department
+1,Alice,25,New York,75000,Engineering
+2,Bob,30,San Francisco,85000,Sales
+3,Charlie,35,Chicago,65000,Marketing
+4,Diana,28,Boston,70000,HR
+5,Eve,32,Seattle,80000,Engineering
+6,Frank,45,Miami,90000,Finance
+7,Grace,27,Denver,68000,Marketing
+8,Henry,33,Austin,72000,Engineering

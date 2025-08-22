@@ -1,0 +1,16 @@
+order_id,customer_id,product_name,quantity,price,order_date,status
+1001,1,Laptop,1,1200.00,2024-01-15,completed
+1002,2,Mouse,2,25.50,2024-01-16,completed
+1003,1,Keyboard,1,75.00,2024-01-16,shipped
+1004,3,Monitor,1,350.00,2024-01-17,completed
+1005,4,Headphones,1,89.99,2024-01-18,pending
+1006,2,Webcam,1,120.00,2024-01-18,completed
+1007,5,Tablet,1,299.99,2024-01-19,shipped
+1008,3,Phone Case,3,15.99,2024-01-20,completed
+1009,1,USB Cable,5,12.99,2024-01-21,completed
+1010,6,Charger,2,35.00,2024-01-22,pending
+1011,4,Speaker,1,199.99,2024-01-23,completed
+1012,2,Desk Lamp,1,45.50,2024-01-24,shipped
+1013,7,Notebook,10,3.99,2024-01-25,completed
+1014,5,Pen Set,2,19.99,2024-01-26,completed
+1015,8,External Drive,1,89.00,2024-01-27,pending

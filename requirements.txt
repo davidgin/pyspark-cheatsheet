@@ -1,0 +1,4 @@
+pyspark==3.5.0
+py4j==0.10.9.7
+pydantic==2.8.2
+typing-extensions==4.12.2

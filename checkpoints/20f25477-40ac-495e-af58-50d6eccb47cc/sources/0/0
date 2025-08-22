@@ -1,0 +1,6 @@
+v1
+{"path":"file:///home/eldan/projects/spark/pyspark/streaming_data/user_activity_001.csv","timestamp":1755794177885,"batchId":0}
+{"path":"file:///home/eldan/projects/spark/pyspark/streaming_data/user_activity_002.csv","timestamp":1755794178885,"batchId":0}
+{"path":"file:///home/eldan/projects/spark/pyspark/streaming_data/user_activity_003.csv","timestamp":1755794179886,"batchId":0}
+{"path":"file:///home/eldan/projects/spark/pyspark/streaming_data/user_activity_004.csv","timestamp":1755794180886,"batchId":0}
+{"path":"file:///home/eldan/projects/spark/pyspark/streaming_data/user_activity_005.csv","timestamp":1755794181888,"batchId":0}

@@ -1,0 +1,11 @@
+timestamp,user_id,action,product,value
+2025-08-21 19:42:20,10,view,tablet,7.94
+2025-08-21 19:42:30,37,purchase,mouse,678.0
+2025-08-21 19:42:40,29,purchase,speaker,106.15
+2025-08-21 19:42:50,9,add_to_cart,tablet,9.17
+2025-08-21 19:43:00,30,view,headphones,7.77
+2025-08-21 19:43:10,50,add_to_cart,webcam,4.35
+2025-08-21 19:43:20,41,purchase,webcam,681.23
+2025-08-21 19:43:30,21,view,mouse,5.1
+2025-08-21 19:43:40,36,view,keyboard,4.21
+2025-08-21 19:43:50,2,remove_from_cart,charger,4.17

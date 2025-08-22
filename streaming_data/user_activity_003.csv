@@ -1,0 +1,11 @@
+timestamp,user_id,action,product,value
+2025-08-21 19:40:19,41,purchase,headphones,897.41
+2025-08-21 19:40:29,28,purchase,headphones,663.05
+2025-08-21 19:40:39,15,purchase,speaker,429.38
+2025-08-21 19:40:49,43,view,laptop,4.29
+2025-08-21 19:40:59,34,view,phone,9.65
+2025-08-21 19:41:09,37,remove_from_cart,phone,8.67
+2025-08-21 19:41:19,46,view,keyboard,4.27
+2025-08-21 19:41:29,41,remove_from_cart,charger,6.0
+2025-08-21 19:41:39,44,add_to_cart,speaker,7.75
+2025-08-21 19:41:49,11,purchase,keyboard,261.48
