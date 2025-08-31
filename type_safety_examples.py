@@ -2,10 +2,12 @@
 Examples demonstrating improved type safety in the PySpark project.
 """
 from typing import Union, List, Dict
-from models import (
-    DataValidator, CustomerModel, OrderModel, 
-    ValidationRecord, UserPreferences, ValidationSummary
-)
+from models import CustomerModel
+from models import DataValidator
+from models import OrderModel
+from models import UserPreferences
+from models import ValidationRecord
+from models import ValidationSummary
 from type_checking import TypeSafetyChecker, PydanticTypeChecker
 from decimal import Decimal
 

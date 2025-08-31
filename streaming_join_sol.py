@@ -9,16 +9,28 @@ the limitations of stream-stream joins.
 """
 
 from pyspark.sql import SparkSession
-from pyspark.sql.functions import (
-    col, count, sum, avg, max, min, window, 
-    to_timestamp, current_timestamp, expr, 
-    when, coalesce, lit, unix_timestamp,
-    from_unixtime, broadcast
-)
-from pyspark.sql.types import (
-    StructType, StructField, StringType, 
-    IntegerType, DoubleType, TimestampType
-)
+from pyspark.sql.functions import avg
+from pyspark.sql.functions import broadcast
+from pyspark.sql.functions import coalesce
+from pyspark.sql.functions import col
+from pyspark.sql.functions import count
+from pyspark.sql.functions import current_timestamp
+from pyspark.sql.functions import expr
+from pyspark.sql.functions import from_unixtime
+from pyspark.sql.functions import lit
+from pyspark.sql.functions import max
+from pyspark.sql.functions import min
+from pyspark.sql.functions import sum
+from pyspark.sql.functions import to_timestamp
+from pyspark.sql.functions import unix_timestamp
+from pyspark.sql.functions import when
+from pyspark.sql.functions import window
+from pyspark.sql.types import DoubleType
+from pyspark.sql.types import IntegerType
+from pyspark.sql.types import StringType
+from pyspark.sql.types import StructField
+from pyspark.sql.types import StructType
+from pyspark.sql.types import TimestampType
 
 def create_streaming_session() -> SparkSession:
     """Create Spark session for streaming joins"""

@@ -1,9 +1,10 @@
 from pyspark.sql import SparkSession
 from schemas import DataSchemas
-from models import (
-    DataValidator, CustomerModel, OrderModel, UserActivityModel,
-    DataValidationError
-)
+from models import CustomerModel
+from models import DataValidationError
+from models import DataValidator
+from models import OrderModel
+from models import UserActivityModel
 from decimal import Decimal
 from datetime import date, datetime
 
