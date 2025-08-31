@@ -34,9 +34,16 @@ derby.log
 metastore_db/
 
 # IDEs
+.vscode/
 .idea/
 *.swp
 *.swo
+
+# Python version
+.python-version
+
+# Data generators
+*generator*
 
 # OS
 .DS_Store
