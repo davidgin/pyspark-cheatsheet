@@ -24,14 +24,14 @@ def load_customers_data(spark: SparkSession) -> DataFrame:
     is_valid = SchemaUtils.validate_dataframe_schema(df, schema, "Customers Data")
     
     if is_valid:
-        print("✅ Customer data schema validation successful")
+        print("[SUCCESS] Customer data schema validation successful")
         # Sample Pydantic validation on first row
         sample_row = df.first().asDict()
         try:
             validated_customer = DataValidator.validate_customer_data(sample_row)
-            print(f"✅ Pydantic validation sample: {validated_customer.name} in {validated_customer.department}")
+            print(f"[SUCCESS] Pydantic validation sample: {validated_customer.name} in {validated_customer.department}")
         except Exception as e:
-            print(f"⚠️  Pydantic validation warning: {e}")
+            print(f"[WARNING] Pydantic validation warning: {e}")
     
     return df
 
@@ -47,16 +47,16 @@ def load_orders_data(spark: SparkSession) -> DataFrame:
     df = df.withColumn("order_date", to_date(col("order_date"), "yyyy-MM-dd"))
     
     # Validate schema after transformation
-    print(f"\n✅ Orders data loaded with explicit schema:")
+    print(f"\n[SUCCESS] Orders data loaded with explicit schema:")
     df.printSchema()
     
     # Sample Pydantic validation
     sample_row = df.first().asDict()
     try:
         validated_order = DataValidator.validate_order_data(sample_row)
-        print(f"✅ Pydantic validation sample: Order {validated_order.order_id} for {validated_order.product_name}")
+        print(f"[SUCCESS] Pydantic validation sample: Order {validated_order.order_id} for {validated_order.product_name}")
     except Exception as e:
-        print(f"⚠️  Pydantic validation warning: {e}")
+        print(f"[WARNING] Pydantic validation warning: {e}")
     
     return df
 

@@ -1,6 +1,6 @@
 from pyspark.sql import SparkSession
-from pyspark.sql.functions import *
-from pyspark.sql.types import *
+from pyspark.sql.functions import avg, col, concat, count, countDistinct, current_timestamp, lit, max, min, round, session_window, sum, to_timestamp, unix_timestamp, window
+from pyspark.sql.types import DoubleType, IntegerType, StringType, StructField, StructType
 
 def create_spark_session():
     return SparkSession.builder \

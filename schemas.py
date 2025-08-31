@@ -172,10 +172,10 @@ class SchemaUtils:
         print(f"\n=== Schema Validation for {name} ===")
         
         if df.schema == expected_schema:
-            print("✅ Schema matches perfectly!")
+            print("[SUCCESS] Schema matches perfectly!")
             return True
         else:
-            print("❌ Schema mismatch detected!")
+            print("[ERROR] Schema mismatch detected!")
             print("\nExpected Schema:")
             for field in expected_schema.fields:
                 print(f"  {field.name}: {field.dataType} (nullable: {field.nullable})")

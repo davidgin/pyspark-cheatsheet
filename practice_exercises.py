@@ -1,6 +1,6 @@
 from pyspark.sql import SparkSession
-from pyspark.sql.functions import *
-from pyspark.sql.types import *
+from pyspark.sql.functions import avg, col, count, round, sum, to_date, when
+# No explicit types used in this file
 from schemas import DataSchemas, SchemaUtils
 
 def create_spark_session() -> SparkSession:

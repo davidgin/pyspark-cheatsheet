@@ -68,7 +68,7 @@ class SkewedDataGenerator:
                 writer.writerow([order_id, product, customer_id, city, 
                                quantity, price, order_date, category])
         
-        print(f"✅ Created {filename}")
+        print(f"[SUCCESS] Created {filename}")
         self._print_distribution_stats(filename, "product_name")
 
     def generate_temporal_skew_data(self, total_records: int = 50000) -> None:
@@ -120,7 +120,7 @@ class SkewedDataGenerator:
                                timestamp.strftime("%Y-%m-%d %H:%M:%S"),
                                page_views, session_duration, purchase_amount])
         
-        print(f"✅ Created {filename}")
+        print(f"[SUCCESS] Created {filename}")
 
     def generate_geographic_skew_data(self, total_records: int = 75000) -> None:
         """Generate data with geographic skew (80/20 rule by location)"""
@@ -165,7 +165,7 @@ class SkewedDataGenerator:
                 writer.writerow([customer_id, name, city, state, zip_code,
                                signup_date, total_orders, lifetime_value])
         
-        print(f"✅ Created {filename}")
+        print(f"[SUCCESS] Created {filename}")
         self._print_distribution_stats(filename, "city")
 
     def generate_user_behavior_skew_data(self, total_records: int = 200000) -> None:
@@ -218,7 +218,7 @@ class SkewedDataGenerator:
                 writer.writerow([session_id, user_id, user_type, page_views,
                                clicks, time_spent, actions, date])
         
-        print(f"✅ Created {filename}")
+        print(f"[SUCCESS] Created {filename}")
         self._print_distribution_stats(filename, "user_type")
 
     def generate_join_skew_scenario(self, large_table_size: int = 100000, 
@@ -263,8 +263,8 @@ class SkewedDataGenerator:
                 
                 writer.writerow([fact_id, dimension_id, value, amount, created_date])
         
-        print(f"✅ Created {large_filename}")
-        print(f"✅ Created {small_filename}")
+        print(f"[SUCCESS] Created {large_filename}")
+        print(f"[SUCCESS] Created {small_filename}")
         self._print_distribution_stats(large_filename, "dimension_id")
 
     def generate_aggregation_skew_data(self, total_records: int = 150000) -> None:
@@ -312,12 +312,12 @@ class SkewedDataGenerator:
                 writer.writerow([transaction_id, selected_category, subcategory, 
                                amount, merchant_id, customer_id, timestamp])
         
-        print(f"✅ Created {filename}")
+        print(f"[SUCCESS] Created {filename}")
         self._print_distribution_stats(filename, "category")
 
     def _print_distribution_stats(self, filename: str, column: str) -> None:
         """Print distribution statistics for a given column"""
-        print(f"\n📊 Distribution stats for {column} in {filename}:")
+        print(f"\n[STATS] Distribution stats for {column} in {filename}:")
         
         # Read and analyze distribution
         with open(filename, 'r') as csvfile:
@@ -342,9 +342,9 @@ class SkewedDataGenerator:
         
         print(f"   Skew ratio (max/avg): {skew_ratio:.2f}")
         if skew_ratio > 5:
-            print("   ⚠️  HIGH SKEW detected!")
+            print("   [WARNING] HIGH SKEW detected!")
         elif skew_ratio > 2:
-            print("   ⚠️  Moderate skew detected")
+            print("   [WARNING] Moderate skew detected")
 
     def generate_all_skew_scenarios(self) -> None:
         """Generate all types of skewed datasets"""
@@ -364,8 +364,8 @@ class SkewedDataGenerator:
         self.generate_aggregation_skew_data(150000)
         
         print("\n" + "=" * 60)
-        print("✅ All skewed datasets generated successfully!")
-        print(f"📁 Files location: {self.output_dir}/")
+        print("[SUCCESS] All skewed datasets generated successfully!")
+        print(f"[INFO] Files location: {self.output_dir}/")
         print("\nDatasets created:")
         print("  - zipfian_skewed_sales.csv (Product popularity skew)")
         print("  - temporal_skewed_events.csv (Time-based skew)")

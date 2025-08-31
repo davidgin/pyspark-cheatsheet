@@ -1,8 +1,8 @@
 from pyspark.sql import SparkSession, DataFrame
-from pyspark.sql.functions import *
+from pyspark.sql.functions import avg, cast, col, count, countDistinct, cube, desc, filter, lag, lit, max, min, month, quarter, rank, rollup, sum, to_date, union, withColumn, year
 from pyspark.sql.functions import round as spark_round
 import builtins
-from pyspark.sql.types import *
+from pyspark.sql.types import DoubleType, IntegerType, StringType, StructField, StructType
 import random
 
 def create_spark_session() -> SparkSession:
@@ -62,9 +62,9 @@ def example_1_cube_vs_regular_aggregation(spark: SparkSession) -> None:
     try:
         print("Creating sample data...")
         df = create_sample_sales_data(spark)
-        print("✅ Sample data created successfully")
+        print("[SUCCESS] Sample data created successfully")
     except Exception as e:
-        print(f"❌ Error creating sample data: {e}")
+        print(f"[ERROR] Error creating sample data: {e}")
         import traceback
         traceback.print_exc()
         return
@@ -130,7 +130,7 @@ def example_1_cube_vs_regular_aggregation(spark: SparkSession) -> None:
     
     print(f"Regular result count: {regular_result.count()} rows")
     
-    print("\n✅ Benefits of Regular Tables over Cube:")
+    print("\n[BENEFITS] Benefits of Regular Tables over Cube:")
     print("   - More explicit and readable")
     print("   - Better control over aggregation levels")
     print("   - Easier to add business logic")
@@ -188,7 +188,7 @@ def example_2_rollup_vs_regular_hierarchy(spark: SparkSession) -> None:
     print("Regular hierarchy results:")
     regular_hierarchy.show(25, truncate=False)
     
-    print("\n✅ Advantages of Regular Hierarchy:")
+    print("\n[ADVANTAGES] Advantages of Regular Hierarchy:")
     print("   - Clear separation of aggregation levels")
     print("   - Easy to add custom logic per level")
     print("   - Better performance control")
@@ -252,7 +252,7 @@ def example_3_multidimensional_regular_analysis(spark: SparkSession) -> None:
     
     cross_analysis.show(20)
     
-    print("\n✅ Regular Multi-dimensional Benefits:")
+    print("\n[BENEFITS] Regular Multi-dimensional Benefits:")
     print("   - Each analysis serves a specific business purpose")
     print("   - Easy to optimize each query independently")
     print("   - Clear business meaning for each result")
@@ -296,12 +296,12 @@ def example_4_performance_comparison(spark: SparkSession) -> None:
     
     print(f"Regular operations: {regular_time:.2f} seconds, {regular_count} result rows")
     
-    print(f"\n📊 Performance Summary:")
+    print(f"\n[PERFORMANCE] Performance Summary:")
     print(f"   Cube: {cube_time:.2f}s for {cube_count} rows")
     print(f"   Regular: {regular_time:.2f}s for {regular_count} rows")
     print(f"   Regular is {cube_time/regular_time:.1f}x {'faster' if regular_time < cube_time else 'slower'}")
     
-    print("\n💡 Key Insights:")
+    print("\n[INSIGHTS] Key Insights:")
     print("   - Cube generates ALL possible combinations (often unnecessary)")
     print("   - Regular operations only compute what you need")
     print("   - Better performance with targeted aggregations")
@@ -374,7 +374,7 @@ def example_5_business_specific_aggregations(spark: SparkSession) -> None:
     
     monthly_trends.show(12, truncate=False)
     
-    print("\n🎯 Business-Focused Approach Benefits:")
+    print("\n[BUSINESS] Business-Focused Approach Benefits:")
     print("   - Each report answers specific business questions")
     print("   - Results are actionable and meaningful")
     print("   - Performance optimized for actual use cases")
@@ -398,15 +398,15 @@ def main() -> None:
         example_5_business_specific_aggregations(spark)
         
         print("\n" + "=" * 50)
-        print("🎯 Summary: Cube vs Regular Tables")
-        print("\n✅ When to Use Regular Tables Instead of Cube:")
+        print("[SUMMARY] Summary: Cube vs Regular Tables")
+        print("\n[GUIDE] When to Use Regular Tables Instead of Cube:")
         print("   - When you need specific business aggregations")
         print("   - When performance is critical")
         print("   - When results need to be easily understood")
         print("   - When integrating with BI tools")
         print("   - When you want predictable query patterns")
         
-        print("\n📋 Migration Strategy:")
+        print("\n[MIGRATION] Migration Strategy:")
         print("   1. Identify actual business requirements")
         print("   2. Replace cube with targeted groupBy operations")
         print("   3. Create separate aggregations for each use case")  
@@ -414,7 +414,7 @@ def main() -> None:
         print("   5. Add business logic and validation")
         
     except Exception as e:
-        print(f"❌ Error in examples: {e}")
+        print(f"[ERROR] Error in examples: {e}")
     finally:
         spark.stop()
 

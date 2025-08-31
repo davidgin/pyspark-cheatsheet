@@ -1,0 +1,22 @@
+{
+    "venvPath": ".",
+    "venv": "venv",
+    "pythonVersion": "3.11",
+    "extraPaths": [
+        "./venv/lib/python3.11/site-packages"
+    ],
+    "typeCheckingMode": "off",
+    "reportMissingImports": "none",
+    "reportMissingTypeStubs": "none",
+    "stubPath": "./venv/lib/python3.11/site-packages",
+    "executionEnvironments": [
+        {
+            "root": ".",
+            "pythonVersion": "3.11",
+            "pythonPlatform": "Linux",
+            "extraPaths": [
+                "./venv/lib/python3.11/site-packages"
+            ]
+        }
+    ]
+}

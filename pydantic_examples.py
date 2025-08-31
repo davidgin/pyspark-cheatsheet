@@ -30,10 +30,10 @@ def example_1_basic_validation() -> None:
     
     try:
         validated = DataValidator.validate_customer_data(valid_customer)
-        print(f"✅ Valid customer: {validated.name} in {validated.city}")
+        print(f"[SUCCESS] Valid customer: {validated.name} in {validated.city}")
         print(f"   Cleaned data: {validated.json()}")
     except DataValidationError as e:
-        print(f"❌ Validation failed: {e}")
+        print(f"[ERROR] Validation failed: {e}")
     
     # Invalid customer data (missing required field)
     invalid_customer = {
@@ -44,9 +44,9 @@ def example_1_basic_validation() -> None:
     
     try:
         validated = DataValidator.validate_customer_data(invalid_customer)
-        print(f"❌ Should have failed: {validated}")
+        print(f"[ERROR] Should have failed: {validated}")
     except DataValidationError as e:
-        print(f"✅ Correctly caught invalid data: {e}")
+        print(f"[SUCCESS] Correctly caught invalid data: {e}")
 
 def example_2_business_rules_validation() -> None:
     """Example 2: Business rules validation"""
@@ -64,9 +64,9 @@ def example_2_business_rules_validation() -> None:
     
     try:
         validated = DataValidator.validate_order_data(large_order)
-        print(f"❌ Should have failed: {validated}")
+        print(f"[ERROR] Should have failed: {validated}")
     except DataValidationError as e:
-        print(f"✅ Business rule enforced: {e}")
+        print(f"[SUCCESS] Business rule enforced: {e}")
     
     # Valid order within limits
     valid_order = {
@@ -81,9 +81,9 @@ def example_2_business_rules_validation() -> None:
     
     try:
         validated = DataValidator.validate_order_data(valid_order)
-        print(f"✅ Valid order: {validated.product_name} x{validated.quantity} = ${validated.quantity * validated.price}")
+        print(f"[SUCCESS] Valid order: {validated.product_name} x{validated.quantity} = ${validated.quantity * validated.price}")
     except DataValidationError as e:
-        print(f"❌ Unexpected validation error: {e}")
+        print(f"[ERROR] Unexpected validation error: {e}")
 
 def example_3_batch_validation() -> None:
     """Example 3: Batch data validation"""
@@ -100,7 +100,7 @@ def example_3_batch_validation() -> None:
     # Get validation summary (doesn't raise exceptions)
     summary = DataValidator.get_validation_summary(customer_batch, CustomerModel)
     
-    print(f"📊 Validation Summary:")
+    print(f"[SUMMARY] Validation Summary:")
     print(f"   Total records: {summary['total_records']}")
     print(f"   Valid records: {summary['valid_count']}")
     print(f"   Invalid records: {summary['invalid_count']}")
@@ -111,14 +111,14 @@ def example_3_batch_validation() -> None:
     
     # Extract only valid records
     valid_records = [record for i, record in summary['valid_records']]
-    print(f"✅ Successfully validated {len(valid_records)} customers")
+    print(f"[SUCCESS] Successfully validated {len(valid_records)} customers")
     
     # Try strict batch validation (will raise exception)
     try:
         strict_validation = DataValidator.validate_batch_data(customer_batch, CustomerModel)
-        print(f"❌ Should have failed due to invalid records")
+        print(f"[ERROR] Should have failed due to invalid records")
     except DataValidationError as e:
-        print(f"✅ Strict validation correctly failed: {str(e)[:100]}...")
+        print(f"[SUCCESS] Strict validation correctly failed: {str(e)[:100]}...")
 
 def example_4_enum_validation() -> None:
     """Example 4: Enum validation and type safety"""
@@ -140,9 +140,9 @@ def example_4_enum_validation() -> None:
     for model_class, data in models_to_test:
         try:
             validated = model_class(**data)
-            print(f"✅ {model_class.__name__} validation successful")
+            print(f"[SUCCESS] {model_class.__name__} validation successful")
         except Exception as e:
-            print(f"❌ {model_class.__name__} validation failed: {e}")
+            print(f"[ERROR] {model_class.__name__} validation failed: {e}")
     
     # Invalid enum values
     print("\n--- Testing Invalid Enum Values ---")
@@ -155,9 +155,9 @@ def example_4_enum_validation() -> None:
     for i, (model_class, data) in enumerate(zip([CustomerModel, OrderModel, UserActivityModel], invalid_enum_data)):
         try:
             validated = model_class(**data)
-            print(f"❌ {model_class.__name__} should have failed")
+            print(f"[ERROR] {model_class.__name__} should have failed")
         except Exception as e:
-            print(f"✅ {model_class.__name__} correctly rejected invalid enum: {str(e)[:60]}...")
+            print(f"[SUCCESS] {model_class.__name__} correctly rejected invalid enum: {str(e)[:60]}...")
 
 def example_5_spark_integration() -> None:
     """Example 5: Integration with PySpark DataFrames"""
@@ -179,29 +179,29 @@ def example_5_spark_integration() -> None:
         
         df = spark.createDataFrame(sample_data, customers_schema)
         
-        print("📊 DataFrame Schema:")
+        print("[SCHEMA] DataFrame Schema:")
         df.printSchema()
         
-        print("\n📋 DataFrame Data:")
+        print("\n[DATA] DataFrame Data:")
         df.show()
         
         # Convert DataFrame rows to Pydantic models for validation
-        print("\n🔍 Validating DataFrame rows with Pydantic:")
+        print("\n[VALIDATING] Validating DataFrame rows with Pydantic:")
         
         rows = df.collect()
         for row in rows:
             row_dict = row.asDict()
             try:
                 validated_customer = CustomerModel(**row_dict)
-                print(f"✅ Row validated: {validated_customer.name} - {validated_customer.department}")
+                print(f"[SUCCESS] Row validated: {validated_customer.name} - {validated_customer.department}")
             except Exception as e:
-                print(f"❌ Row validation failed: {e}")
+                print(f"[ERROR] Row validation failed: {e}")
         
         # Demonstrate validation summary on DataFrame data
         df_data = [row.asDict() for row in df.collect()]
         validation_summary = DataValidator.get_validation_summary(df_data, CustomerModel)
         
-        print(f"\n📈 DataFrame Validation Summary:")
+        print(f"\n[SUMMARY] DataFrame Validation Summary:")
         print(f"   Spark DataFrame rows: {df.count()}")
         print(f"   Pydantic valid rows: {validation_summary['valid_count']}")
         print(f"   Validation success rate: {validation_summary['validation_rate']:.1%}")
@@ -220,7 +220,7 @@ def example_6_data_cleaning_pipeline() -> None:
         {"customer_id": 3, "name": "Charlie", "city": "CHICAGO", "department": "marketing"},
     ]
     
-    print("📥 Raw Data (before cleaning):")
+    print("[RAW DATA] Raw Data (before cleaning):")
     for data in raw_customer_data:
         print(f"   {data}")
     
@@ -234,14 +234,14 @@ def example_6_data_cleaning_pipeline() -> None:
             cleaned_customer = CustomerModel(**raw_data)
             cleaned_data.append(cleaned_customer)
         except Exception as e:
-            print(f"⚠️  Skipping invalid record: {e}")
+            print(f"[WARNING] Skipping invalid record: {e}")
     
-    print(f"\n✨ Cleaned Data ({len(cleaned_data)} records):")
+    print(f"\n[CLEANED] Cleaned Data ({len(cleaned_data)} records):")
     for customer in cleaned_data:
         print(f"   {customer.name} | {customer.city} | {customer.department}")
     
     # Show JSON output
-    print(f"\n📄 JSON Export:")
+    print(f"\n[JSON] JSON Export:")
     for customer in cleaned_data:
         print(f"   {customer.json()}")
 
@@ -259,17 +259,17 @@ def main() -> None:
         example_6_data_cleaning_pipeline()
         
         print("\n" + "=" * 50)
-        print("🎯 Pydantic Integration Examples Complete!")
+        print("[COMPLETE] Pydantic Integration Examples Complete!")
         print("\nKey Benefits Demonstrated:")
-        print("✅ Runtime data validation")
-        print("✅ Automatic data cleaning and formatting")
-        print("✅ Business rule enforcement")
-        print("✅ Type safety with enums")
-        print("✅ Batch validation capabilities")
-        print("✅ Seamless PySpark integration")
+        print("[SUCCESS] Runtime data validation")
+        print("[SUCCESS] Automatic data cleaning and formatting")
+        print("[SUCCESS] Business rule enforcement")
+        print("[SUCCESS] Type safety with enums")
+        print("[SUCCESS] Batch validation capabilities")
+        print("[SUCCESS] Seamless PySpark integration")
         
     except Exception as e:
-        print(f"❌ Error in examples: {e}")
+        print(f"[ERROR] Error in examples: {e}")
 
 if __name__ == "__main__":
     main()

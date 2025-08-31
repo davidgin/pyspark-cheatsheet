@@ -289,13 +289,13 @@ def main():
     
     try:
         customer = DataValidator.validate_customer_data(customer_data)
-        print("✅ Customer validation successful:")
+        print("[SUCCESS] Customer validation successful:")
         print(f"   Name: {customer.name}")
         print(f"   City: {customer.city}")
         print(f"   Department: {customer.department}")
         print(f"   JSON: {customer.json()}")
     except DataValidationError as e:
-        print(f"❌ Customer validation failed: {e}")
+        print(f"[ERROR] Customer validation failed: {e}")
     
     # Example order data with business rule validation
     order_data = {
@@ -309,12 +309,12 @@ def main():
     
     try:
         order = DataValidator.validate_order_data(order_data)
-        print("\n✅ Order validation successful:")
+        print("\n[SUCCESS] Order validation successful:")
         print(f"   Product: {order.product_name}")
         print(f"   Price: ${order.price}")
         print(f"   Total: ${order.quantity * order.price}")
     except DataValidationError as e:
-        print(f"\n❌ Order validation failed: {e}")
+        print(f"\n[ERROR] Order validation failed: {e}")
     
     print("\n" + "=" * 40)
     print("Pydantic models ready for use with PySpark!")

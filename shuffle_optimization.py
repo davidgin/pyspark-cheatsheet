@@ -1,7 +1,7 @@
 from pyspark.sql import SparkSession, DataFrame
-from pyspark.sql.functions import *
+from pyspark.sql.functions import broadcast, cast, col, concat, count, desc, filter, lit, rand, split, sum, when
 import builtins
-from pyspark.sql.types import *
+from pyspark.sql.types import DoubleType, IntegerType, StringType, StructField, StructType
 from typing import Callable, TypeVar, ParamSpec
 import time
 import random
@@ -30,7 +30,7 @@ def measure_execution_time(func: Callable[P, R]) -> Callable[P, R]:
         start_time = time.time()
         result = func(*args, **kwargs)
         end_time = time.time()
-        print(f"⏱️  Execution time: {end_time - start_time:.2f} seconds")
+        print(f"[TIME] Execution time: {end_time - start_time:.2f} seconds")
         return result
     return wrapper
 
@@ -60,11 +60,11 @@ class ShuffleAnalyzer:
             print(f"Skew ratio (max/avg): {max_skew_ratio:.2f}")
             
             if max_skew_ratio > 3:
-                print("⚠️  HIGH SKEW DETECTED! Consider repartitioning.")
+                print("[WARNING] HIGH SKEW DETECTED! Consider repartitioning.")
             elif max_skew_ratio > 1.5:
-                print("⚠️  Moderate skew detected.")
+                print("[WARNING] Moderate skew detected.")
             else:
-                print("✅ Well-balanced partitions.")
+                print("[SUCCESS] Well-balanced partitions.")
 
     @staticmethod
     def show_execution_plan(df: DataFrame, name: str = "Query") -> None:
@@ -386,7 +386,7 @@ def exercise_6_adaptive_query_execution(spark: SparkSession) -> None:
     print("\n--- Query with AQE Optimizations ---")
     ShuffleAnalyzer.show_execution_plan(result, "AQE Optimized Query")
     
-    print("\n💡 AQE Benefits:")
+    print("\n[INFO] AQE Benefits:")
     print("   - Automatically coalesces small partitions")
     print("   - Handles skewed joins dynamically")
     print("   - Switches join strategies based on runtime stats")
@@ -441,7 +441,7 @@ def exercise_7_performance_comparison(spark: SparkSession) -> None:
     print("\nPre-partitioned aggregation:")
     test_partitioned_aggregation()
     
-    print("\n💡 Optimization Tips:")
+    print("\n[INFO] Optimization Tips:")
     print("   - Use appropriate partitioning for your access patterns")
     print("   - Enable AQE for automatic optimizations")
     print("   - Monitor execution plans for shuffle operations")
@@ -466,13 +466,13 @@ def main():
         exercise_7_performance_comparison(spark)
         
         print("\n" + "=" * 70)
-        print("🎯 Shuffle Optimization Exercises Complete!")
+        print("[COMPLETE] Shuffle Optimization Exercises Complete!")
         print("\nKey Takeaways:")
-        print("✅ Use explicit partitioning for frequently accessed columns")
-        print("✅ Enable AQE for automatic optimizations")
-        print("✅ Apply broadcast joins for small tables")
-        print("✅ Use salting technique for skewed data")
-        print("✅ Monitor partition distribution and execution plans")
+        print("[TIP] Use explicit partitioning for frequently accessed columns")
+        print("[TIP] Enable AQE for automatic optimizations")
+        print("[TIP] Apply broadcast joins for small tables")
+        print("[TIP] Use salting technique for skewed data")
+        print("[TIP] Monitor partition distribution and execution plans")
         
     except Exception as e:
         print(f"Error in exercises: {e}")

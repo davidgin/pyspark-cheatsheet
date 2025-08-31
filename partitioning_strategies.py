@@ -1,7 +1,7 @@
 from pyspark.sql import SparkSession, DataFrame
-from pyspark.sql.functions import *
+from pyspark.sql.functions import avg, col, count, countDistinct, sum, to_date
 import builtins
-from pyspark.sql.types import *
+from pyspark.sql.types import DoubleType, IntegerType, StringType, StructField, StructType
 from typing import Dict, Callable, Union, List, Tuple
 import time
 import random
@@ -69,11 +69,11 @@ class PartitionAnalyzer:
         
         # Skew assessment
         if skew_ratio > 3:
-            print("⚠️  HIGH SKEW - Consider repartitioning!")
+            print("[WARNING] HIGH SKEW - Consider repartitioning!")
         elif skew_ratio > 1.5:
-            print("⚠️  Moderate skew detected")
+            print("[WARNING] Moderate skew detected")
         else:
-            print("✅ Well-balanced partitions")
+            print("[SUCCESS] Well-balanced partitions")
         
         return analysis
     
@@ -111,7 +111,7 @@ class PartitionAnalyzer:
         end_time = time.time()
         execution_time = end_time - start_time
         
-        print(f"⏱️  {operation_name}: {execution_time:.2f} seconds")
+        print(f"[TIME] {operation_name}: {execution_time:.2f} seconds")
         return execution_time
 
 def exercise_1_default_partitioning(spark: SparkSession) -> None:
@@ -213,7 +213,7 @@ def exercise_2_repartitioning_strategies(spark: SparkSession) -> None:
     print("\n--- Performance Comparison ---")
     
     def groupby_operation(dataframe):
-        return dataframe.groupBy("city").agg(avg("score").alias("avg_score"))
+        return dataframe.groupBy("city").agg(avg("price").alias("avg_price"))
     
     print("GroupBy performance comparison:")
     PartitionAnalyzer.measure_operation_performance(df, groupby_operation, "Original")
@@ -535,16 +535,16 @@ def main():
         exercise_6_partition_pruning(spark)
         
         print("\n" + "=" * 60)
-        print("🎯 Partitioning Strategy Exercises Complete!")
+        print("[COMPLETE] Partitioning Strategy Exercises Complete!")
         print("\nKey Partitioning Best Practices:")
-        print("✅ Partition by frequently filtered columns")
-        print("✅ Use appropriate number of partitions (not too many, not too few)")
-        print("✅ Consider bucketing for frequently joined tables")
-        print("✅ Use range partitioning for time-series data")
-        print("✅ Leverage partition pruning for query optimization")
-        print("✅ Monitor partition skew and rebalance when needed")
-        print("✅ Use coalesce() to reduce small partitions")
-        print("✅ Apply dynamic partitioning based on data characteristics")
+        print("[TIP] Partition by frequently filtered columns")
+        print("[TIP] Use appropriate number of partitions (not too many, not too few)")
+        print("[TIP] Consider bucketing for frequently joined tables")
+        print("[TIP] Use range partitioning for time-series data")
+        print("[TIP] Leverage partition pruning for query optimization")
+        print("[TIP] Monitor partition skew and rebalance when needed")
+        print("[TIP] Use coalesce() to reduce small partitions")
+        print("[TIP] Apply dynamic partitioning based on data characteristics")
         
     except Exception as e:
         print(f"Error in exercises: {e}")

@@ -1,5 +1,6 @@
 {
     "python.defaultInterpreterPath": "./venv/bin/python",
+    "python.pythonPath": "./venv/bin/python",
     "python.terminal.activateEnvironment": true,
     "python.linting.enabled": true,
     "python.linting.pylintEnabled": false,
@@ -13,14 +14,17 @@
         "venv": true
     },
     "python.analysis.extraPaths": [
-        "./venv/lib/python*/site-packages"
+        "./venv/lib/python3.11/site-packages"
     ],
-    "python.analysis.typeCheckingMode": "basic",
+    "python.analysis.typeCheckingMode": "off",
     "python.analysis.autoImportCompletions": true,
     "python.analysis.diagnosticSeverityOverrides": {
+        "reportMissingImports": "none",
+        "reportMissingTypeStubs": "none",
         "reportAttributeAccessIssue": "none",
         "reportOptionalMemberAccess": "none",
         "reportGeneralTypeIssues": "none",
         "reportUnknownMemberType": "none"
-    }
+    },
+    "python.analysis.stubPath": "./venv/lib/python3.11/site-packages"
 }

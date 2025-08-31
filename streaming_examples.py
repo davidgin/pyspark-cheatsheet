@@ -1,7 +1,7 @@
 from pyspark.sql import SparkSession
-from pyspark.sql.functions import *
-from pyspark.sql.types import *
-from pyspark.sql.streaming import *
+from pyspark.sql.functions import avg, col, count, countDistinct, current_timestamp, hour, max, min, sum, to_timestamp, unix_timestamp, window
+from pyspark.sql.types import DoubleType, IntegerType, StringType, StructField, StructType
+# Most streaming functionality is accessed through DataFrame methods
 
 def create_streaming_session():
     return SparkSession.builder \

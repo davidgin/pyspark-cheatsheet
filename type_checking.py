@@ -206,25 +206,25 @@ def check_for_any_usage() -> None:
         'pydantic_examples'
     ]
     
-    print("🔍 Checking for Any type usage in project modules:")
+    print("[ANALYZING] Checking for Any type usage in project modules:")
     print("=" * 60)
     
     for module in project_modules:
         try:
             any_usage = TypeSafetyChecker.find_any_types_in_module(module)
             if any_usage:
-                print(f"\n📁 Module: {module}")
+                print(f"\n[MODULE] Module: {module}")
                 for usage in any_usage:
-                    print(f"   ⚠️  {usage}")
+                    print(f"   [WARNING] {usage}")
             else:
-                print(f"✅ Module: {module} - No Any types found")
+                print(f"[SUCCESS] Module: {module} - No Any types found")
         except Exception as e:
-            print(f"❌ Module: {module} - Error: {e}")
+            print(f"[ERROR] Module: {module} - Error: {e}")
     
     print("\n" + "=" * 60)
-    print("💡 Consider replacing Any types with more specific Union types")
-    print("💡 Use TypeVar for generic functions")
-    print("💡 Use Pydantic models for structured data validation")
+    print("[TIP] Consider replacing Any types with more specific Union types")
+    print("[TIP] Use TypeVar for generic functions")
+    print("[TIP] Use Pydantic models for structured data validation")
 
 if __name__ == "__main__":
     check_for_any_usage()

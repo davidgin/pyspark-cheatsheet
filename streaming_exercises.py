@@ -1,7 +1,7 @@
 from pyspark.sql import SparkSession
-from pyspark.sql.functions import *
-from pyspark.sql.types import *
-from pyspark.sql.streaming import *
+from pyspark.sql.functions import col, count, current_timestamp, explode, split, sum, to_timestamp, window
+from pyspark.sql.types import DoubleType, IntegerType, StringType, StructField, StructType
+# Most streaming functionality is accessed through DataFrame methods
 from schemas import DataSchemas, SchemaUtils
 import os
 
