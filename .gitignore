@@ -34,7 +34,6 @@ derby.log
 metastore_db/
 
 # IDEs
-.vscode/
 .idea/
 *.swp
 *.swo
