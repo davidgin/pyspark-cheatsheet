@@ -26,5 +26,11 @@
         "reportGeneralTypeIssues": "none",
         "reportUnknownMemberType": "none"
     },
-    "python.analysis.stubPath": "./venv/lib/python3.11/site-packages"
+    "python.analysis.stubPath": "./venv/lib/python3.11/site-packages",
+    "github.copilot.enable": {
+        "*": false,
+        "plaintext": false,
+        "markdown": false,
+        "scminput": false
+    }
 }
